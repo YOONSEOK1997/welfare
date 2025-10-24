@@ -1,0 +1,196 @@
+@charset "EUC-KR";
+/* ===============================
+    HEADER STYLE (공통)
+    =============================== */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', 'Malgun Gothic', sans-serif;
+}
+
+/* 헤더 기본 스타일 */
+.header {
+    background-color: white;
+    color: #333;
+    padding: 25px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+/* 스크롤 시 축소 효과 */
+.header.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* 내부 정렬 */
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 로고 */
+.logo img {
+    height: 45px;
+    transition: height 0.3s;
+}
+.header.scrolled .logo img {
+    height: 35px;
+}
+
+/* 네비게이션 */
+.nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.nav ul li {
+    margin-left: 30px;
+}
+.nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 550;
+    transition: color 0.3s;
+}
+.nav ul li a:hover {
+    color: #0b4c5f;
+}
+
+/* =======================================================
+   ⭐️ 드롭다운 메뉴 스타일 (Submenu) - 세로정렬 및 투명도 적용
+   ======================================================= */
+
+/* 드롭다운 컨테이너 (li) */
+.nav .nav-dropdown {
+    position: relative; 
+    margin-left: 20px; 
+}
+
+/* 서브메뉴 숨기기 및 기본 스타일 */
+.nav .submenu {
+    position: absolute;
+    top: 100%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    /* ⭐️ 변경: 배경색을 반투명 흰색(90% 불투명도)으로 설정 */
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-top: 3px solid rgb(16, 78, 86); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    min-width: 180px;
+    z-index: 1000;
+    
+    /* 숨김 처리 및 애니메이션 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s ease-in-out;
+    transform: translate(-50%, 10px); 
+}
+
+/* 마우스 호버 시 서브메뉴 표시 */
+.nav .nav-dropdown:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0); 
+}
+
+/* 서브메뉴 항목 스타일 */
+.nav .submenu li {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    margin-left: 0; 
+    /* ⭐️ 변경: li가 블록 요소임을 명시적으로 추가하여 세로 정렬 보장 */
+    display: block; 
+}
+
+.nav .submenu li:last-child {
+    border-bottom: none;
+}
+
+/* ⭐️ 핵심: a 태그는 block으로 설정되어 li 전체 너비를 차지하며 세로 정렬을 돕습니다. */
+.nav .submenu a {
+    display: block; 
+    padding: 10px 15px;
+    color: #444; 
+    font-weight: normal; 
+    white-space: nowrap; 
+}
+
+.nav .submenu a:hover {
+    background-color: #f5f5f5;
+    color: rgb(16, 78, 86);
+}
+
+.nav .submenu a i {
+    margin-right: 8px; 
+    font-size: 14px;
+}
+
+/* 예약/신청 토글 버튼 (예약하기) 스타일 */
+.nav .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+.nav .dropdown-toggle i {
+    margin-left: 5px; 
+    font-size: 10px;
+}
+
+/* =======================================================
+   반응형
+   ======================================================= */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+    }
+    .nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav ul li {
+        margin: 10px 0;
+    }
+    
+    .nav .submenu {
+        position: static; 
+        transform: none;
+        width: 80%; 
+        margin-top: 5px;
+        box-shadow: none;
+        border: none;
+        border-top: 3px solid rgb(16, 78, 86);
+    }
+    
+    .nav .submenu {
+        display: none; 
+        opacity: 1; 
+        visibility: visible; 
+    }
+    
+    .nav .nav-dropdown {
+        width: 100%;
+        text-align: center;
+        margin-left: 0;
+    }
+}
