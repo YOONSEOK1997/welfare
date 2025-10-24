@@ -177,7 +177,7 @@
 <main>
     <section class="sub-visual">
         <div class="sub-visual-content">
-            <h1>소망재가복지센터 서비스 소개</h1>
+            <h1>서비스 소개</h1>
             <p>어르신의 삶의 질 향상을 위한 전문적이고 체계적인 재가 서비스를 제공합니다.</p>
         </div>
     </section>
