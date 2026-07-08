@@ -1,77 +1,155 @@
 package com.example.dopza.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.resend.Resend;
+import com.resend.services.emails.model.CreateEmailOptions;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
+
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    @Value("${resend.api.key}")
+    private String apiKey;
+
+    @Value("${resend.from}")
+    private String fromEmail;
 
     private static final String ADMIN_EMAIL = "wntmd122@naver.com";
 
     // --- 기존 수급자 예약 메일 전송 로직 ---
+    // 수급자 예약 메일
     public void sendRecepeientsEmail(
         String applicantName, String phoneNumber, String patientName, String address, String patientGender,
-        String age, String height, String weight, String diagnosis, String careType, String preferredCaregiverGender,
-        String livingArrangement, String petPresence, String cctvPresence, String patientMealSupport,
-        String caregiverMealProvided, String requestDetails) throws MessagingException {
+        String age, String height, String weight, String diagnosis, String careType,
+        String preferredCaregiverGender, String livingArrangement, String petPresence,
+        String cctvPresence, String patientMealSupport, String caregiverMealProvided,
+        String requestDetails) throws MessagingException {
+
 
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-
-            helper.setTo(ADMIN_EMAIL);
-            helper.setFrom("somang-f@naver.com", "소망재가복지센터 예약 시스템");
-            helper.setSubject("재가복지센터 신규 수급자 접수 - 신청자 : " + applicantName);
 
             String htmlContent = generateHtmlContent(
-                applicantName, phoneNumber, patientName, address, patientGender, age, height, weight,
-                diagnosis, careType, preferredCaregiverGender, livingArrangement, petPresence,
-                cctvPresence, patientMealSupport, caregiverMealProvided, requestDetails
+                applicantName,
+                phoneNumber,
+                patientName,
+                address,
+                patientGender,
+                age,
+                height,
+                weight,
+                diagnosis,
+                careType,
+                preferredCaregiverGender,
+                livingArrangement,
+                petPresence,
+                cctvPresence,
+                patientMealSupport,
+                caregiverMealProvided,
+                requestDetails
             );
 
-            helper.setText(htmlContent, true);
-            mailSender.send(message);
+
+            Resend resend = new Resend(apiKey);
+
+
+            CreateEmailOptions params =
+                    CreateEmailOptions.builder()
+                    .from(fromEmail)
+                    .to(ADMIN_EMAIL)
+                    .subject("재가복지센터 신규 수급자 접수 - 신청자 : " + applicantName)
+                    .html(htmlContent)
+                    .build();
+
+
+            resend.emails().send(params);
+
 
         } catch (Exception e) {
-            System.err.println("예약 메일 전송 실패: " + e.getMessage());
-            throw new MessagingException("메일 전송 실패: " + e.getMessage());
+
+            System.err.println("예약 메일 전송 실패 : " + e.getMessage());
+
+            throw new MessagingException(
+                "메일 전송 실패 : " + e.getMessage()
+            );
         }
+
     }
-    
-    // 새로운 간병인 신청 
+
+
+
+    // 요양보호사 신청 메일
     public void sendCaregiverEmail(
-        String name, String phone, String birthYear, String nationality, String gender, String address,
-        String desiredWorkLocation, String workType, String preferredPatientGender,
-        String availableSchedule, String experienceYears, String otherLicenses, String strengths) throws MessagingException {
+        String name,
+        String phone,
+        String birthYear,
+        String nationality,
+        String gender,
+        String address,
+        String desiredWorkLocation,
+        String workType,
+        String preferredPatientGender,
+        String availableSchedule,
+        String experienceYears,
+        String otherLicenses,
+        String strengths) throws MessagingException {
+
 
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
-            helper.setTo(ADMIN_EMAIL);
-            helper.setFrom("somang-f@naver.com", "재가복지센터");
-            helper.setSubject("요양보호사 신규 채용 신청 - 성함: " + name + " / 연락처: " + phone);
 
             String htmlContent = generateCaregiverHtmlContent(
-                name, phone, birthYear, nationality, gender, address,
-                desiredWorkLocation, workType, preferredPatientGender,
-                availableSchedule, experienceYears, otherLicenses, strengths
+                name,
+                phone,
+                birthYear,
+                nationality,
+                gender,
+                address,
+                desiredWorkLocation,
+                workType,
+                preferredPatientGender,
+                availableSchedule,
+                experienceYears,
+                otherLicenses,
+                strengths
             );
 
-            helper.setText(htmlContent, true);
-            mailSender.send(message);
 
-        } catch (Exception e) {
-            System.err.println("간병인 신청 메일 전송 실패: " + e.getMessage());
-            throw new MessagingException("메일 전송 실패: " + e.getMessage());
+            Resend resend = new Resend(apiKey);
+
+
+
+            CreateEmailOptions params =
+                    CreateEmailOptions.builder()
+                    .from(fromEmail)
+                    .to(ADMIN_EMAIL)
+                    .subject("요양보호사 신규 채용 신청 - 성함 : " + name)
+                    .html(htmlContent)
+                    .build();
+
+
+            resend.emails().send(params);
+
+
+
+        } catch(Exception e) {
+
+
+            System.err.println("간병인 신청 메일 전송 실패 : " + e.getMessage());
+
+
+            throw new MessagingException(
+                "메일 전송 실패 : " + e.getMessage()
+            );
         }
+
     }
 
     // --- 기존 수급자 예약 HTML 내용 생성 ---
