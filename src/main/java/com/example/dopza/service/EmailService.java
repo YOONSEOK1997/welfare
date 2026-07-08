@@ -74,7 +74,7 @@ public class EmailService {
 
         } catch (Exception e) {
 
-            System.err.println("예약 메일 전송 실패 : " + e.getMessage());
+            System.err.println("수급자 메일 전송 실패 : " + e.getMessage());
 
             throw new MessagingException(
                 "메일 전송 실패 : " + e.getMessage()
@@ -183,7 +183,7 @@ public class EmailService {
                         border-collapse: collapse;
                         margin: 0 auto 20px auto;
                         font-size: 18px;
-                    }
+//                    }
                     th, td {
                         border: 1px solid #bdc3c7;
                         padding: 12px 16px;
