@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소망재가복지센터</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-    <style>
+	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico">
+      <style>
         body, html {
             margin: 0;
             padding: 0;
