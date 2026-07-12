@@ -262,24 +262,19 @@ h1, h2, h3 {
 		font-size: 16px;
 		margin-bottom: 15px;
 	}
-	.btn-group {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 20px;
-	}
-	.btn-reservation, .btn-reservation.secondary {
-		width: 90%;
-		max-width: 320px;
-		padding: 16px 20px;
-		margin: 0;
-		font-size: 18px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		gap: 8px;
-		box-sizing: border-box;
-	}
+	.btn-group{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:15px;
+}
+
+.btn-reservation,
+.btn-reservation.secondary{
+    width:90%;
+    max-width:320px;
+    margin:0;
+}
 	.section-intro {
 		flex-direction: column;
 		padding: 60px 20px;
