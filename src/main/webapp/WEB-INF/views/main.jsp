@@ -94,26 +94,31 @@
         }
 		
         /* ⭐️ 변경: 수급자 신청 버튼 - 밝은 시안색 */
-        .btn-reservation {
-            background-color: #00bcd4; /* Bright Cyan */
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            margin-left :30px;
-        }
+       .btn-reservation {
+    background-color:#00bcd4;
+    color:#fff;
+    padding:15px 30px;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:8px;
+    transition:.3s;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+
+    margin:0;
+}
         .btn-reservation:hover { 
             background-color: #0097a7;
         }
 
         /* ⭐ 변경: 요양보호사 지원 버튼 - 더 밝은 하늘색 */
-        .btn-reservation.secondary {
-            background-color:  #00bcd4; 
-            color: white;
-            margin-right: 20px;
-        }
+       .btn-reservation.secondary{
+    background:#00bcd4;
+    margin:0;
+}
         .btn-reservation.secondary:hover {
             background-color:  #0097a7; 
         }
@@ -214,17 +219,94 @@
             text-align: justify;
         }
 
-        /* 반응형 */
-        @media (max-width: 768px) {
-            .overlay h2 { font-size: 32px; }
-            .overlay p { font-size: 16px; }
-            .section-intro { flex-direction: column; padding: 50px 20px; }
-            .intro-image-area::before { transform: translate(10px, 10px); }
+      /* ==========================
+   Mobile Responsive
+========================== */
+@media (max-width:768px){
 
-            /* ⭐️ 모바일 헤더 높이에 맞춰 조정 (헤더가 작아지므로) */
-            .main-visual { padding-top: 70px; }
-            .overlay { padding-top: 70px; }
-        }
+    .main-visual{
+        height:75vh;
+        min-height:600px;
+        padding-top:70px;
+    }
+
+    .overlay{
+        padding:80px 20px 30px;
+    }
+
+    .overlay h2{
+        font-size:36px;
+        line-height:1.3;
+        margin-bottom:25px;
+    }
+
+    .overlay p{
+        font-size:16px;
+        margin-bottom:15px;
+    }
+
+    .btn-group{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:15px;
+        width:100%;
+    }
+
+    .btn-reservation,
+    .btn-reservation.secondary{
+        width:90%;
+        max-width:320px;
+        padding:16px 20px;
+        margin:0;
+        font-size:18px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:8px;
+        box-sizing:border-box;
+    }
+
+    .section-intro{
+        flex-direction:column;
+        padding:60px 20px;
+        gap:30px;
+    }
+
+    .intro-image-area{
+        order:-1;
+        width:100%;
+        max-width:330px;
+        padding:0;
+    }
+
+    .intro-image-area::before{
+        display:none;
+    }
+
+    .intro-text-area h2{
+        font-size:28px;
+        text-align:center;
+    }
+
+    .intro-text-area p{
+        font-size:16px;
+        line-height:1.9;
+        text-align:left;
+    }
+
+    .center-values li{
+        font-size:15px;
+    }
+
+    .center-director-info{
+        text-align:center;
+    }
+
+    .center-director-info strong{
+        font-size:24px;
+    }
+}
     </style>
 </head>
 
