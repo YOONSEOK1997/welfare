@@ -33,7 +33,6 @@ h1, h2, h3 {
 	/* ⭐️ 헤더 높이만큼 Padding을 줘서, 메인 콘텐츠가 헤더 아래에서 시작하도록 설정 */
 	padding-top: 80px;
 	box-sizing: border-box;
-	/* 단일 이미지 배경 설정 제거 */
 }
 
 /* ⭐️ 슬라이더 트랙: 모든 슬라이드를 감싸며 가로로 정렬 */
@@ -103,6 +102,15 @@ h1, h2, h3 {
 	color: #fff;
 }
 
+/* 데스크톱 버전 버튼 그룹 (가로 일렬 배치 및 간격 설정) */
+.btn-group {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 20px; /* 버튼 사이의 간격 */
+}
+
 /* ⭐️ 변경: 수급자 신청 버튼 - 밝은 시안색 */
 .btn-reservation {
 	background-color: #00bcd4;
@@ -116,7 +124,6 @@ h1, h2, h3 {
 	justify-content: center;
 	align-items: center;
 	gap: 8px;
-	margin: 0;
 }
 
 .btn-reservation:hover {
@@ -126,12 +133,12 @@ h1, h2, h3 {
 /* ⭐ 변경: 요양보호사 지원 버튼 - 더 밝은 하늘색 */
 .btn-reservation.secondary {
 	background: #00bcd4;
-	margin: 0;
 }
 
 .btn-reservation.secondary:hover {
 	background-color: #0097a7;
 }
+
 /* 섹션 2 (소개) */
 .section-intro {
 	background-color: white;
@@ -142,13 +149,10 @@ h1, h2, h3 {
 	margin: 0 auto;
 	gap: 50px;
 }
-/* ------------------------------------------- */
-/* 섹션 2: 인물 소개 스타일 추가/수정 */
-/* ------------------------------------------- */
 
 /* 센터 핵심 가치 목록 스타일 */
 .section-intro .center-values {
-	list-style: none; /* 기본 리스트 마커 제거 */
+	list-style: none;
 	padding-left: 0;
 	margin-top: 25px;
 	margin-bottom: 30px;
@@ -158,38 +162,36 @@ h1, h2, h3 {
 	line-height: 1.8;
 	color: #444;
 	margin-bottom: 10px;
-	padding-left: 1.5em; /* 들여쓰기 */
-	text-indent: -1.5em; /* 번호/글머리 기호 위치 조정 */
+	padding-left: 1.5em;
+	text-indent: -1.5em;
 }
 
 .section-intro .center-values li strong {
-	color: rgb(16, 78, 86); /* 번호와 제목 색상 강조 */
+	color: rgb(16, 78, 86);
 	font-weight: 700;
 }
 
-/* ⭐️ 센터장 직함 영역 스타일 (크게 강조) */
+/* ⭐️ 센터장 직함 영역 스타일 */
 .center-director-info {
 	margin-top: 30px;
 	padding-top: 20px;
-	border-top: 1px solid #ddd; /* 구분선 추가 */
+	border-top: 1px solid #ddd;
 	color: #555;
 	font-size: 16px;
 	line-height: 1.6;
 }
 
 .center-director-info strong {
-	/* ⭐️ 이름 부분의 글자 크기를 크게 설정 */
 	font-size: 26px;
 	font-weight: bold;
-	display: block; /* 줄 바꿈 후 블록 요소로 만들어 크기 적용 */
+	display: block;
 	color: rgb(16, 78, 86);
 	margin-top: 5px;
 }
 
-/* 기존 .intro-text-area p 스타일을 유지하면서 strong 태그가 잘 보이도록 설정 */
 .intro-text-area p strong {
 	font-weight: bold;
-	color: #0d5f69; /* 일반 텍스트 내 강조 색상 */
+	color: #0d5f69;
 }
 
 .intro-text-area {
@@ -217,7 +219,6 @@ h1, h2, h3 {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	/* border: 10px solid rgb(16, 78, 86); */
 	transform: translate(15px, 15px);
 	z-index: 1;
 }
@@ -262,19 +263,20 @@ h1, h2, h3 {
 		font-size: 16px;
 		margin-bottom: 15px;
 	}
-	.btn-group{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:15px;
-}
+	
+	/* 모바일에서는 세로로 배열하되, 버튼 사이 간격(gap)을 확실히 줍니다 */
+	.btn-group {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 15px; /* 모바일에서 위아래 버튼 사이 떨어지는 간격 */
+	}
 
-.btn-reservation,
-.btn-reservation.secondary{
-    width:90%;
-    max-width:320px;
-    margin:0;
-}
+	.btn-reservation, .btn-reservation.secondary {
+		width: 90%;
+		max-width: 320px;
+	}
+	
 	.section-intro {
 		flex-direction: column;
 		padding: 60px 20px;
@@ -376,51 +378,40 @@ h1, h2, h3 {
 	</main>
 
 	<script>
-    // 헤더 스크롤 축소 효과
     window.addEventListener('scroll', function() {
         const header = document.querySelector('.header');
-        // toggle 메소드를 사용하여 코드를 더 간결하게 수정했습니다.
-        header.classList.toggle('scrolled', window.scrollY > 100);
+        if(header) {
+            header.classList.toggle('scrolled', window.scrollY > 100);
+        }
     });
 
-
-    /* ⭐️⭐️⭐️ 자동 슬라이드 기능 추가 ⭐️⭐️⭐️ */
     const sliderTrack = document.getElementById('sliderTrack');
     const slides = document.querySelectorAll('.slide');
-    const slideCount = slides.length; // 현재 3개
+    const slideCount = slides.length;
     let currentSlide = 0;
 
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slideCount; // 0 -> 1 -> 2 -> 0 순환
-        
-        // 슬라이더 트랙을 이동하여 현재 슬라이드를 표시
-        // 이동 거리: -0vw, -100vw, -200vw
+        currentSlide = (currentSlide + 1) % slideCount;
         const offset = -currentSlide * 100;
         sliderTrack.style.transform = `translateX(${offset}vw)`;
     }
 
-    // 5초(5000ms)마다 nextSlide 함수 호출하여 자동 전환
     let slideInterval = setInterval(nextSlide, 5000);
 
-    // 마우스를 올렸을 때 슬라이드 정지, 벗어났을 때 다시 시작
     const mainVisual = document.querySelector('.main-visual');
     let isPaused = false;
 
     mainVisual.addEventListener('mouseenter', () => {
-        clearInterval(slideInterval); // 인터벌 중지
+        clearInterval(slideInterval);
         isPaused = true;
     });
 
     mainVisual.addEventListener('mouseleave', () => {
         if (isPaused) {
-            // 다시 시작 (새로운 인터벌 할당)
             slideInterval = setInterval(nextSlide, 5000);
             isPaused = false;
         }
     });
- 
-
-
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
