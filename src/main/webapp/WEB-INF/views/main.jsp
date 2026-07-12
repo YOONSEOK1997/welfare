@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>소망재가복지센터</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico">
-      <style>
+
+    <style>
         body, html {
             margin: 0;
             padding: 0;
@@ -108,7 +108,7 @@
             background-color: #0097a7;
         }
 
-        /* ⭐️ 변경: 요양보호사 지원 버튼 - 더 밝은 하늘색 */
+        /* ⭐ 변경: 요양보호사 지원 버튼 - 더 밝은 하늘색 */
         .btn-reservation.secondary {
             background-color:  #00bcd4; 
             color: white;
